@@ -17,7 +17,8 @@ CREATE TABLE silver.ess_mnp (
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
-    hours NUMERIC(4,2)
+    hours NUMERIC(4,2),
+    ess_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
 
 DROP TABLE IF EXISTS silver.ess_inm;
@@ -28,7 +29,8 @@ CREATE TABLE silver.ess_inm(
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
-    hours NUMERIC(4,2)
+    hours NUMERIC(4,2),
+    ess_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.wfm_employees;
@@ -37,5 +39,6 @@ CREATE TABLE silver.wfm_employees (
     nessie INT,
     hourly_rate NUMERIC(4,2),
     GCM_level INT,
-    position VARCHAR(50)
+    position VARCHAR(50),
+    wfm_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
