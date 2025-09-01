@@ -38,7 +38,9 @@ CREATE TABLE bronze.wfm_employees (
     name VARCHAR(50),
     GCM_level INT,
     hourly_rate NUMERIC(4,2),
-    competence VARCHAR(50),
+    competence VARCHAR(50)
+    /*
     sales_rate NUMERIC(4,2),
     cost_rate NUMERIC(4,2)
+    */
 );
