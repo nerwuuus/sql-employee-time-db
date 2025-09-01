@@ -35,10 +35,11 @@ CREATE TABLE silver.ess_inm(
 
 DROP TABLE IF EXISTS silver.wfm_employees;
 CREATE TABLE silver.wfm_employees (
-    name VARCHAR(50),
     nessie INT,
-    hourly_rate NUMERIC(4,2),
-    GCM_level INT,
-    position VARCHAR(50),
+    internal_or_external VARCHAR(50),
+    name VARCHAR(50),
+    gcm_level INT,
+    hourly_rate NUMERIC(5,2),
+    competence VARCHAR(255),
     wfm_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
