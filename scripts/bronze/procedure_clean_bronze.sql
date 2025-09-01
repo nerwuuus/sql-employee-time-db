@@ -24,9 +24,9 @@ AS $$
 BEGIN
     TRUNCATE TABLE bronze.ess_mnp;
     TRUNCATE TABLE bronze.ess_inm;
-    TRUNCATE_TABLE bronze.wfm_emloyees;
+    TRUNCATE TABLE bronze.wfm_emloyees;
 
     -- Custom message
-    RAISE NOTICE 'Bronze tables have been successfully truncated.'
+    RAISE NOTICE 'Bronze tables have been successfully truncated.';
 END;
 $$;
