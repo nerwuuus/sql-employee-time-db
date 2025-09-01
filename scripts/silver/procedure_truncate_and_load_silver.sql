@@ -20,13 +20,13 @@ AS $$
 BEGIN
     TRUNCATE TABLE silver.ess_mnp;
     INSERT INTO silver.ess_mnp (
-    name VARCHAR(255),
-    nessie INT,
-    date DATE,
-    status VARCHAR(255),
-    wbs VARCHAR(255),
-    wbs_description VARCHAR(255),
-    hours NUMERIC(4,2)  
+      name VARCHAR(255),
+      nessie INT,
+      date DATE,
+      status VARCHAR(255),
+      wbs VARCHAR(255),
+      wbs_description VARCHAR(255),
+      hours NUMERIC(4,2)  
     )
     SELECT 
         -- Here will be added columns after data cleaning
@@ -34,13 +34,13 @@ BEGIN
 
     TRUNCATE TABLE silver.ess_inm;
     INSERT INTO silver.ess_inm (
-    name VARCHAR(255),
-    nessie INT,
-    date DATE,
-    status VARCHAR(255),
-    wbs VARCHAR(255),
-    wbs_description VARCHAR(255),
-    hours NUMERIC(4,2)
+      name VARCHAR(255),
+      nessie INT,
+      date DATE,
+      status VARCHAR(255),
+      wbs VARCHAR(255),
+      wbs_description VARCHAR(255),
+      hours NUMERIC(4,2)
     )
     SELECT
         -- Here will be added columns after data cleaning
@@ -48,11 +48,11 @@ BEGIN
 
     TRUNCATE TABLE silver.wfm_employees;
     INSERT INTO silver.wfm_employees (
-    name VARCHAR(50),
-    nessie INT,
-    hourly_rate NUMERIC(4,2),
-    GCM_level INT,
-    position VARCHAR(50)     
+      name VARCHAR(50),
+      nessie INT,
+      hourly_rate NUMERIC(4,2),
+      GCM_level INT,
+      position VARCHAR(50)     
     )
     SELECT
         -- Here will be added columns after data cleaning
