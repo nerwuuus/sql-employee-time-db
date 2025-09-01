@@ -1,5 +1,4 @@
 /*
-
 ============================================================================
 Stored Procedure: Truncate Bronze Layer
 ============================================================================
@@ -12,7 +11,6 @@ Script purpose:
 Needed only when the procedure with the same name exists:
   DROP FUNCTION IF EXISTS bronze.clean_bronze(); 
 ============================================================================
-
 */
 
 -- Invoke a procedure
