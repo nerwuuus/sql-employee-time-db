@@ -3,7 +3,7 @@
 ============================================================================
 Stored Procedure: Truncate Bronze Layer
 ============================================================================
-Script Purpose:
+Script purpose:
   This stored procedure removes rows from the 'bronze' schema.
   It performs the following actions:
   - Truncates all bronze tables before loading new data.
