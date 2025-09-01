@@ -11,7 +11,6 @@ WARNING:
   Running this script will drop the entire 'ess' database if it exists.
   All data in the database will be permanently deleted. Proceed with caution
   and ensure you have proper backups before running this script.
-
 */
 
 -- Drop if exists and create 'ess' database
