@@ -1,5 +1,4 @@
 /*
-
 ============================================================================
 DDL Script: Create Silver Tables
 ============================================================================
@@ -8,7 +7,6 @@ Script Purpose:
   if they already exist.
 Run this script to redefine the DDL structure of 'silver' Tables.
 ============================================================================
-
 */
 
 DROP TABLE IF EXISTS silver.ess_mnp;
