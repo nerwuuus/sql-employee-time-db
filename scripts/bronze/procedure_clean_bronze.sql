@@ -19,7 +19,7 @@ Needed only when the procedure with the same name exists:
 CALL bronze.clean_bronze();
 
 CREATE OR REPLACE PROCEDURE bronze.clean_bronze()
-LANGUAGE plpgssql
+LANGUAGE plpgsql
 AS $$
 BEGIN
     TRUNCATE TABLE bronze.ess_mnp;
