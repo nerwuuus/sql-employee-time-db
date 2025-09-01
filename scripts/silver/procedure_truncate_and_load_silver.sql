@@ -1,5 +1,4 @@
 /*
-
 ============================================================================
 Stored Procedure: Load Silver Layer (Bronze -> Silver)
 ============================================================================
@@ -10,7 +9,6 @@ Actions Performed:
   - Truncates Silver tables.
   - Inserts transformed and cleansed data from Bronze into Silver tables.
 ============================================================================
-
 */
 
 -- Invoke a procedure
@@ -61,6 +59,6 @@ BEGIN
     FROM silver.wfm_employees;
 
     -- Custom message
-    RAISE NOTICE 'Silver tables have been successfully updated.'
+    RAISE NOTICE 'Silver tables have been successfully updated.';
 END;
 $$;
