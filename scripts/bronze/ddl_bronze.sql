@@ -31,7 +31,7 @@ CREATE TABLE bronze.ess_inm (
     hours NUMERIC(4,2)
 );
 
-DROP TABLE IF EXISTS bronze.ess_wfm;
+DROP TABLE IF EXISTS bronze.wfm_employees;
 CREATE TABLE bronze.ess_wfm (
     name VARCHAR(50),
     nessie INT,
