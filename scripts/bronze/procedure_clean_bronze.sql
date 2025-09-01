@@ -1,1 +1,32 @@
+/*
 
+============================================================================
+Stored Procedure: Truncate Bronze Layer
+============================================================================
+Script Purpose:
+  This stored procedure removes rows from the 'bronze' schema.
+  It performs the following actions:
+  - Truncates all bronze tables before loading new data.
+  - Prints a custom message after execution.
+============================================================================
+Needed only when the procedure with the same name exists:
+  DROP FUNCTION IF EXISTS bronze.clean_bronze(); 
+============================================================================
+
+*/
+
+-- Invoke a procedure
+CALL bronze.clean_bronze();
+
+CREATE OR REPLACE PROCEDURE bronze.clean_bronze()
+LANGUAGE plpgssql
+AS $$
+BEGIN
+    TRUNCATE TABLE bronze.ess_mnp;
+    TRUNCATE TABLE bronze.ess_inm;
+    TRUNCATE_TABLE bronze.wfm_emloyees;
+
+    -- Custom message
+    RAISE NOTICE 'Bronze tables have been successfully truncated.'
+END;
+$$;
