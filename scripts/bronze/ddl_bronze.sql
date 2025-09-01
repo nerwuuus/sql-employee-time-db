@@ -32,10 +32,13 @@ CREATE TABLE bronze.ess_inm (
 );
 
 DROP TABLE IF EXISTS bronze.wfm_employees;
-CREATE TABLE bronze.ess_wfm (
-    name VARCHAR(50),
+CREATE TABLE bronze.wfm_employees (
     nessie INT,
-    hourly_rate NUMERIC(4,2),
+    internal_or_external VARCHAR(50),
+    name VARCHAR(50),
     GCM_level INT,
-    position VARCHAR(50)
+    hourly_rate NUMERIC(4,2),
+    competence VARCHAR(50),
+    sales_rate NUMERIC(4,2),
+    cost_rate NUMERIC(4,2)
 );
