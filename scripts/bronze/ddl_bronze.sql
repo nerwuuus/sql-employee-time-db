@@ -37,7 +37,7 @@ CREATE TABLE bronze.wfm_employees (
     internal_or_external VARCHAR(50),
     name VARCHAR(50),
     GCM_level INT,
-    hourly_rate NUMERIC(4,2),
+    hourly_rate NUMERIC(5,2),
     competence VARCHAR(255)
     /*
     sales_rate NUMERIC(4,2),
