@@ -113,5 +113,3 @@ WHERE
     RAISE NOTICE 'Silver tables have been successfully updated.';
 END;
 $$;
-
-
