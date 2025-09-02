@@ -11,7 +11,7 @@ Error 'Permission denied' while uploading data. Paste the code below in pgAdmin4
 -- Perform the full load on bronze ess and wfm tables
 TRUNCATE TABLE bronze.ess_mnp;
 COPY bronze.ess_mnp
-FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\mnp.csv'
+FROM 'C:\Users\(...)\OneDrive - (...)\Desktop\mnp.csv'
 WITH (
     FORMAT csv,
     HEADER true,
@@ -21,7 +21,7 @@ WITH (
 
 TRUNCATE TABLE bronze.ess_inm;
 COPY bronze.ess_mnp
-FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\inm.csv'
+FROM 'C:\Users\(...)\OneDrive - (...)\Desktop\inm.csv'
 WITH (
     FORMAT csv,
     HEADER true,
@@ -31,7 +31,7 @@ WITH (
 
 TRUNCATE TABLE bronze.wfm_employees;
 COPY bronze.wfm_employees
-FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv'
+FROM 'C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv'
 WITH (
     FORMAT csv,
     HEADER true,
