@@ -9,22 +9,22 @@ Run this script to redefine the DDL structure of 'bronze' Tables
 ============================================================================
 */
 
-DROP TABLE IF EXISTS bronze.ess_mnp;
-CREATE TABLE bronze.ess_mnp (
+DROP TABLE IF EXISTS bronze.sap_mnp;
+CREATE TABLE bronze.sap_mnp (
     name VARCHAR(255),
     nessie INT,
-    date DATE,
+    work_date DATE,
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
     hours NUMERIC(4,2)
 );
 
-DROP TABLE IF EXISTS bronze.ess_inm;
-CREATE TABLE bronze.ess_inm (
+DROP TABLE IF EXISTS bronze.sap_inm;
+CREATE TABLE bronze.sap_inm (
     name VARCHAR(255),
     nessie INT,
-    date DATE,
+    work_date DATE,
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
@@ -39,8 +39,6 @@ CREATE TABLE bronze.wfm_employees (
     GCM_level INT,
     hourly_rate NUMERIC(5,2),
     competence VARCHAR(255)
-    /*
-    sales_rate NUMERIC(4,2),
-    cost_rate NUMERIC(4,2)
-    */
 );
+
+DROP TABLE bronze.ess_mnp

@@ -1,6 +1,6 @@
-# **Naming Conventions**
+# **Naming Convention**
 
-This document outlines the naming conventions used for schemas, tables, views, columns, and other objects in the data warehouse.
+This document outlines the naming conventions used for schemas, tables, views, columns, and other objects in the 'ess' database.
 
 ## **Table of Contents**
 
@@ -10,7 +10,6 @@ This document outlines the naming conventions used for schemas, tables, views, c
    - [Silver Rules](#silver-rules)
    - [Gold Rules](#gold-rules)
 3. [Column Naming Conventions](#column-naming-conventions)
-   - [Surrogate Keys](#surrogate-keys)
    - [Technical Columns](#technical-columns)
 4. [Stored Procedure](#stored-procedure-naming-conventions)
 ---

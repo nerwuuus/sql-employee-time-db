@@ -20,9 +20,9 @@ CREATE OR REPLACE PROCEDURE bronze.clean_bronze()
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    TRUNCATE TABLE bronze.ess_mnp;
-    TRUNCATE TABLE bronze.ess_inm;
-    TRUNCATE TABLE bronze.wfm_emloyees;
+    TRUNCATE TABLE bronze.sap_mnp;
+    TRUNCATE TABLE bronze.sap_inm;
+    TRUNCATE TABLE bronze.wfm_employees;
 
     -- Custom message
     RAISE NOTICE 'Bronze tables have been successfully truncated.';

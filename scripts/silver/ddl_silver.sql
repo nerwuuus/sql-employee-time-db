@@ -9,11 +9,11 @@ Run this script to redefine the DDL structure of 'silver' Tables.
 ============================================================================
 */
 
-DROP TABLE IF EXISTS silver.ess_mnp;
-CREATE TABLE silver.ess_mnp (
+DROP TABLE IF EXISTS silver.sap_mnp;
+CREATE TABLE silver.sap_mnp (
     name VARCHAR(255),
     nessie INT,
-    date DATE,
+    work_date DATE,
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
@@ -21,11 +21,11 @@ CREATE TABLE silver.ess_mnp (
     ess_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
 
-DROP TABLE IF EXISTS silver.ess_inm;
-CREATE TABLE silver.ess_inm(
+DROP TABLE IF EXISTS silver.sap_inm;
+CREATE TABLE silver.sap_inm (
     name VARCHAR(255),
     nessie INT,
-    date DATE,
+    work_date DATE,
     status VARCHAR(255),
     wbs VARCHAR(255),
     wbs_description VARCHAR(255),
@@ -44,3 +44,4 @@ CREATE TABLE silver.wfm_employees (
     daily_rate NUMERIC(6,2),
     wfm_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+

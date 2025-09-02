@@ -18,23 +18,23 @@ DROP VIEW IF EXISTS gold.fact_time_all;
 CREATE OR REPLACE VIEW gold.fact_time_all AS
     SELECT
         mnp.name,
-        mnp.nessie,
-        mnp.date,
+        mnp.nessie AS id,
+        mnp.work_date,
         mnp.status,
         mnp.wbs,
         mnp.wbs_description,
         mnp.hours
-    FROM silver.ess_mnp AS mnp
+    FROM silver.sap_mnp AS mnp
     UNION
     SELECT
         inm.name,
-        inm.nessie,
-        inm.date,
+        inm.nessie AS id,
+        inm.work_date,
         inm.status,
         inm.wbs,
         inm.wbs_description,
         inm.hours
-    FROM silver.ess_inm AS inm;
+    FROM silver.sap_inm AS inm;
 
 
 -- Filter out last month's approved hours (dynamic script)
@@ -42,33 +42,34 @@ DROP VIEW IF EXISTS gold.fact_recent_approved_hours;
 CREATE VIEW gold.fact_recent_approved_hours AS
     SELECT
         name,
-        nessie,
-        date,
+        id,
+        work_date,
         wbs,
         hours AS daily_approved_hours,
         SUM(hours) OVER (PARTITION BY name) AS total_approved_hours
     FROM gold.fact_time_all
     WHERE
-        TO_CHAR(date, 'MM-YYYY') = TO_CHAR(CURRENT_DATE - INTERVAL '1 month', 'MM-YYYY')
+        TO_CHAR(work_date, 'MM-YYYY') = TO_CHAR(CURRENT_DATE - INTERVAL '1 month', 'MM-YYYY')
         AND status = 'Approved';
 
 
 DROP VIEW IF EXISTS gold.dim_employees;
 CREATE VIEW gold.dim_employees AS
     SELECT
-        nessie,
+        nessie AS id,
         name,
         seniority,
         hourly_rate,
         competence
     FROM silver.wfm_employees;
 
-DROP VIEW IF EXISTS gold.fact_employees;
-CREATE VIEW gold.fact_employees AS
+
+DROP VIEW IF EXISTS gold.fact_employees_hours;
+CREATE VIEW gold.fact_employees_hours AS
     SELECT
         frah.name,
-        frah.nessie,
-        frah.date,
+        frah.id,
+        frah.work_date,
         frah.wbs,
         frah.daily_approved_hours,
         frah.total_approved_hours,
@@ -77,5 +78,5 @@ CREATE VIEW gold.fact_employees AS
         de.competence
     FROM gold.fact_recent_approved_hours AS frah
     LEFT JOIN gold.dim_employees AS de
-        ON frah.nessie = de.nessie
+        ON frah.id = de.id
     WHERE de.hourly_rate IS NOT NULL;
