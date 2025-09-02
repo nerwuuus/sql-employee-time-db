@@ -58,6 +58,10 @@ CREATE VIEW gold.dim_employees AS
     SELECT
         nessie,
         name,
+        seniority,
         hourly_rate,
         competence
     FROM silver.wfm_employees
+
+SELECT *
+FROM gold.dim_employees

@@ -38,7 +38,7 @@ CREATE TABLE silver.wfm_employees (
     nessie INT,
     internal_or_external VARCHAR(50),
     name VARCHAR(50),
-    gcm_level INT,
+    seniority VARCHAR(50),
     hourly_rate NUMERIC(5,2),
     competence VARCHAR(255),
     daily_rate NUMERIC(6,2),

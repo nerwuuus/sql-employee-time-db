@@ -80,7 +80,7 @@ INSERT INTO silver.wfm_employees (
     nessie,
     internal_or_external,
     name,
-    gcm_level,
+    seniority,
     hourly_rate,
     competence,
     daily_rate
@@ -92,7 +92,11 @@ SELECT
         ELSE internal_or_external
     END AS internal_or_external,
     name,
-    gcm_level,
+    CASE
+        WHEN gcm_level <= 3 THEN 'Junior'
+        WHEN gcm_level BETWEEN 4 AND 6 THEN 'Intermediate'
+        ELSE 'Senior'
+    END AS seniority,
     hourly_rate,
     TRIM(SPLIT_PART( -- Extract the part before the first comma from a string
         CASE
