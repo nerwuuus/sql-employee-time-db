@@ -1,12 +1,12 @@
-# Data Catalog for Gold Layer
+# Data Catalog for the Gold Layer
 
 ## Overview
 The Gold Layer is the business-level data representation, structured to support analytical and reporting use cases. It consists of **dimension tables** and **fact tables** for specific business metrics.
 
 ---
 
-### 1. **gold.dim_customers**
-- **Purpose:** Stores customer details enriched with demographic and geographic data.
+### 1. **gold.dim_employees**
+- **Purpose:** 
 - **Columns:**
 
 | Column Name      | Data Type     | Description                                                                                   |
@@ -24,8 +24,8 @@ The Gold Layer is the business-level data representation, structured to support 
 
 ---
 
-### 2. **gold.dim_products**
-- **Purpose:** Provides information about the products and their attributes.
+### 2. **gold.fact_employees_hours**
+- **Purpose:** 
 - **Columns:**
 
 | Column Name         | Data Type     | Description                                                                                   |
@@ -44,8 +44,26 @@ The Gold Layer is the business-level data representation, structured to support 
 
 ---
 
-### 3. **gold.fact_sales**
-- **Purpose:** Stores transactional sales data for analytical purposes.
+### 3. **gold.fact_recent_approved_hours**
+- **Purpose:** 
+- **Columns:**
+
+| Column Name     | Data Type     | Description                                                                                   |
+|-----------------|---------------|-----------------------------------------------------------------------------------------------|
+| order_number    | NVARCHAR(50)  | A unique alphanumeric identifier for each sales order (e.g., 'SO54496').                      |
+| product_key     | INT           | Surrogate key linking the order to the product dimension table.                               |
+| customer_key    | INT           | Surrogate key linking the order to the customer dimension table.                              |
+| order_date      | DATE          | The date when the order was placed.                                                           |
+| shipping_date   | DATE          | The date when the order was shipped to the customer.                                          |
+| due_date        | DATE          | The date when the order payment was due.                                                      |
+| sales_amount    | INT           | The total monetary value of the sale for the line item, in whole currency units (e.g., 25).   |
+| quantity        | INT           | The number of units of the product ordered for the line item (e.g., 1).                       |
+| price           | INT           | The price per unit of the product for the line item, in whole currency units (e.g., 25).      |
+
+---
+
+### 4. **gold.fact_time_all**
+- **Purpose:** 
 - **Columns:**
 
 | Column Name     | Data Type     | Description                                                                                   |

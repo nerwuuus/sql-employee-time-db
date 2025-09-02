@@ -16,65 +16,58 @@ This document outlines the naming conventions used for schemas, tables, views, c
 
 ## **General Principles**
 
-- **Naming Conventions**: Use snake_case, with lowercase letters and underscores (`_`) to separate words.
-- **Language**: Use English for all names.
+- **Naming Convention**: Use snake_case, with lowercase letters and underscores (`_`) to separate words.
+- **Language**: Use English language.
 - **Avoid Reserved Words**: Do not use SQL reserved words as object names.
 
-## **Table Naming Conventions**
+## **Table Naming Convention**
 
 ### **Bronze Rules**
 - All names must start with the source system name, and table names must match their original names without renaming.
 - **`<sourcesystem>_<entity>`**  
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).  
+  - `<sourcesystem>`: Name of the source system (e.g., `sap`).  
   - `<entity>`: Exact table name from the source system.  
-  - Example: `crm_customer_info` → Customer information from the CRM system.
+  - Example: `sap_mnp` → Time booking information from the SAP system.
 
 ### **Silver Rules**
 - All names must start with the source system name, and table names must match their original names without renaming.
 - **`<sourcesystem>_<entity>`**  
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).  
+  - `<sourcesystem>`: Name of the source system (e.g., `sap`). 
   - `<entity>`: Exact table name from the source system.  
-  - Example: `crm_customer_info` → Customer information from the CRM system.
+  - Example: `sap_mnp` → Time booking information from the SAP system.
 
 ### **Gold Rules**
 - All names must use meaningful, business-aligned names for tables, starting with the category prefix.
 - **`<category>_<entity>`**  
   - `<category>`: Describes the role of the table, such as `dim` (dimension) or `fact` (fact table).  
-  - `<entity>`: Descriptive name of the table, aligned with the business domain (e.g., `customers`, `products`, `sales`).  
+  - `<entity>`: Descriptive name of the table, aligned with the business domain (e.g., `time`, `recent_approved_hours`, `employees`).  
   - Examples:
-    - `dim_customers` → Dimension table for customer data.  
-    - `fact_sales` → Fact table containing sales transactions.  
+    - `dim_employees` → Dimension table for employee data.  
+    - `fact_time_all` → Fact table containing all employee time transactions.  
 
 #### **Glossary of Category Patterns**
 
 | Pattern     | Meaning                           | Example(s)                              |
 |-------------|-----------------------------------|-----------------------------------------|
-| `dim_`      | Dimension table                  | `dim_customer`, `dim_product`           |
-| `fact_`     | Fact table                       | `fact_sales`                            |
-| `report_`   | Report table                     | `report_customers`, `report_sales_monthly`   |
+| `dim_`      | Dimension table                  | `dim_employees`          |
+| `fact_`     | Fact table                       | `fact_time_all`                            |
+| `report_`   | Report table                     | N/A  |
 
 ## **Column Naming Conventions**
 
-### **Surrogate Keys**  
-- All primary keys in dimension tables must use the suffix `_key`.
-- **`<table_name>_key`**  
-  - `<table_name>`: Refers to the name of the table or entity the key belongs to.  
-  - `_key`: A suffix indicating that this column is a surrogate key.  
-  - Example: `customer_key` → Surrogate key in the `dim_customers` table.
-  
 ### **Technical Columns**
-- All technical columns must start with the prefix `dwh_`, followed by a descriptive name indicating the column's purpose.
-- **`dwh_<column_name>`**  
-  - `dwh`: Prefix exclusively for system-generated metadata.  
+- All technical columns must start with the prefix `ess_`, followed by a descriptive name indicating the column's purpose.
+- **`ess_<column_name>`**  
+  - `ess`: Prefix exclusively used for system-generated metadata.  
   - `<column_name>`: Descriptive name indicating the column's purpose.  
-  - Example: `dwh_load_date` → System-generated column used to store the date when the record was loaded.
+  - Example: `ess_create_date` → A system-generated column that records the timestamp when each record was loaded into the database.
  
-## **Stored Procedure**
+## **Stored Procedures**
 
 - All stored procedures used for loading data must follow the naming pattern:
-- **`load_<layer>`**.
+- **`<layer>.load_<layer>`**.
   
   - `<layer>`: Represents the layer being loaded, such as `bronze`, `silver`, or `gold`.
   - Example: 
-    - `load_bronze` → Stored procedure for loading data into the Bronze layer.
-    - `load_silver` → Stored procedure for loading data into the Silver layer.
+    - `bronze.load_bronze` → Stored procedure for loading data into the Bronze layer.
+    - `silver.load_silver` → Stored procedure for loading data into the Silver layer.
