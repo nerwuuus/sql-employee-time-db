@@ -61,7 +61,21 @@ CREATE VIEW gold.dim_employees AS
         seniority,
         hourly_rate,
         competence
-    FROM silver.wfm_employees
+    FROM silver.wfm_employees;
 
-SELECT *
-FROM gold.dim_employees
+DROP VIEW IF EXISTS gold.fact_employees;
+CREATE VIEW gold.fact_employees AS
+    SELECT
+        frah.name,
+        frah.nessie,
+        frah.date,
+        frah.wbs,
+        frah.daily_approved_hours,
+        frah.total_approved_hours,
+        de.seniority,
+        de.hourly_rate,
+        de.competence
+    FROM gold.fact_recent_approved_hours AS frah
+    LEFT JOIN gold.dim_employees AS de
+        ON frah.nessie = de.nessie
+    WHERE de.hourly_rate IS NOT NULL;
