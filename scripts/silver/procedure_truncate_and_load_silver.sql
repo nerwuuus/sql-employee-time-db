@@ -82,7 +82,8 @@ INSERT INTO silver.wfm_employees (
     name,
     gcm_level,
     hourly_rate,
-    competence 
+    competence,
+    daily_rate
 )
 SELECT
     nessie,
@@ -100,7 +101,8 @@ SELECT
         END,
         ',',
         1
-    )) AS competence
+    )) AS competence,
+    hourly_rate * 8 AS daily_rate
 FROM bronze.wfm_employees
 WHERE
     nessie IS NOT NULL 
@@ -111,3 +113,5 @@ WHERE
     RAISE NOTICE 'Silver tables have been successfully updated.';
 END;
 $$;
+
+

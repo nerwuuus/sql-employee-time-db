@@ -41,5 +41,6 @@ CREATE TABLE silver.wfm_employees (
     gcm_level INT,
     hourly_rate NUMERIC(5,2),
     competence VARCHAR(255),
+    daily_rate NUMERIC(6,2),
     wfm_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
