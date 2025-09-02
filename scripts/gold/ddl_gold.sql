@@ -52,9 +52,3 @@ CREATE VIEW gold.recent_approved_hours AS
         TO_CHAR(date, 'MM-YYYY') = TO_CHAR(CURRENT_DATE - INTERVAL '1 month', 'MM-YYYY')
         AND status = 'Approved';
 
-
-SELECT *
-FROM gold.fact_time_all
-
-SELECT *
-FROM gold.recent_approved_hours
