@@ -15,7 +15,7 @@ FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\mnp.csv'
 WITH (
     FORMAT csv,
     HEADER true,
-    DELIMITER ',',
+    DELIMITER ';',
     ENCODING 'UTF8'
 );
 
@@ -25,7 +25,7 @@ FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\inm.csv'
 WITH (
     FORMAT csv,
     HEADER true,
-    DELIMITER ',',
+    DELIMITER ';',
     ENCODING 'UTF8'
 );
 
@@ -35,7 +35,7 @@ FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv'
 WITH (
     FORMAT csv,
     HEADER true,
-    DELIMITER ',',
+    DELIMITER ';',
     ENCODING 'UTF8'
 );
 
