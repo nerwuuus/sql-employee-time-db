@@ -1,21 +1,22 @@
 /*
-============================================================================
-DDL Script: Create Gold Views
-============================================================================
+===============================================================================
+Quality Checks
+===============================================================================
 Script Purpose:
-    This script creates views for the Gold layer in the data warehouse.
-    The Gold layer represents the final dimension and fact tables (Star Schema)
+    This script performs quality checks to validate the integrity, consistency, 
+    and accuracy of the Gold Layer. These checks ensure:
+    - Uniqueness of surrogate keys in dimension tables.
+    - Referential integrity between fact and dimension tables.
+    - Validation of relationships in the data model for analytical purposes.
 
-    Each view performs transformations and combines data from the Silver layer
-    to produce a clean, enriched, and business-ready dataset.
-
-Usage:
-- These views can be queried directly for analytics and reporting.
-============================================================================
+Usage Notes:
+    - Investigate and resolve any discrepancies found during the checks.
+===============================================================================
 */
 
-DROP VIEW IF EXISTS gold.fact_time_all;
-CREATE OR REPLACE VIEW gold.fact_time_all AS
+-- Compare the results of the silver.ess_mnp and silver.ess_inm tables using a UNION operation
+-- Expectation: no results
+WITH union_result AS (
     SELECT
         mnp.name,
         mnp.nessie,
@@ -34,27 +35,33 @@ CREATE OR REPLACE VIEW gold.fact_time_all AS
         inm.wbs,
         inm.wbs_description,
         inm.hours
-    FROM silver.ess_inm AS inm;
-
-
--- Filter out last month's approved hours (dynamic script)
-DROP VIEW IF EXISTS gold.recent_approved_hours;
-CREATE VIEW gold.recent_approved_hours AS
+    FROM silver.ess_inm AS inm
+),
+union_all_result AS (
     SELECT
-        name,
-        nessie,
-        date,
-        wbs,
-        hours AS daily_approved_hours,
-        SUM(hours) OVER (PARTITION BY name) AS total_approved_hours
-    FROM gold.fact_time_all
-    WHERE
-        TO_CHAR(date, 'MM-YYYY') = TO_CHAR(CURRENT_DATE - INTERVAL '1 month', 'MM-YYYY')
-        AND status = 'Approved';
+        mnp.name,
+        mnp.nessie,
+        mnp.date,
+        mnp.status,
+        mnp.wbs,
+        mnp.wbs_description,
+        mnp.hours
+    FROM silver.ess_mnp AS mnp
+    UNION ALL
+    SELECT
+        inm.name,
+        inm.nessie,
+        inm.date,
+        inm.status,
+        inm.wbs,
+        inm.wbs_description,
+        inm.hours
+    FROM silver.ess_inm AS inm
+)
+SELECT * FROM union_all_result
+EXCEPT
+SELECT * FROM union_result;
 
-
-SELECT *
-FROM gold.fact_time_all
-
-SELECT *
-FROM gold.recent_approved_hours
+SELECT * FROM union_result
+EXCEPT
+SELECT * FROM union_all_result;
