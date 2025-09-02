@@ -38,8 +38,8 @@ CREATE OR REPLACE VIEW gold.fact_time_all AS
 
 
 -- Filter out last month's approved hours (dynamic script)
-DROP VIEW IF EXISTS gold.recent_approved_hours;
-CREATE VIEW gold.recent_approved_hours AS
+DROP VIEW IF EXISTS gold.fact_recent_approved_hours;
+CREATE VIEW gold.fact_recent_approved_hours AS
     SELECT
         name,
         nessie,
@@ -52,3 +52,12 @@ CREATE VIEW gold.recent_approved_hours AS
         TO_CHAR(date, 'MM-YYYY') = TO_CHAR(CURRENT_DATE - INTERVAL '1 month', 'MM-YYYY')
         AND status = 'Approved';
 
+
+DROP VIEW IF EXISTS gold.dim_employees;
+CREATE VIEW gold.dim_employees AS
+    SELECT
+        nessie,
+        name,
+        hourly_rate,
+        competence
+    FROM silver.wfm_employees
