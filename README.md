@@ -7,7 +7,7 @@ This portfolio project showcases a comprehensive database solution designed for 
 ## 🏗️ Data Architecture
 
 The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
-![Data Architecture](/sql-employee-time-db/documents/data_architecture.png)
+![Data Architecture](documents/data_architecture.png)
 
 1. **Bronze Layer**: Stores raw data from the source systems. Data is loaded from .csv files into a PostgreSQL database using the '/copy' command in pgAdmin4.
 2. **Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.
