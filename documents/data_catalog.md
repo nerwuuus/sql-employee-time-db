@@ -1,4 +1,4 @@
-# Data Catalog for the Gold Layer
+# Data Catalog - Gold Layer
 
 ## Overview
 The Gold Layer is the business-level data representation, structured to support analytical and reporting use cases. It consists of **dimension tables** and **fact tables** for specific business metrics.
@@ -6,74 +6,64 @@ The Gold Layer is the business-level data representation, structured to support 
 ---
 
 ### 1. **gold.dim_employees**
-- **Purpose:** 
+- **Purpose:** Stores key employee attributes such as ID, name, seniority, hourly rate, and competence for reporting and analysis.
 - **Columns:**
 
 | Column Name      | Data Type     | Description                                                                                   |
 |------------------|---------------|-----------------------------------------------------------------------------------------------|
-| customer_key     | INT           | Surrogate key uniquely identifying each customer record in the dimension table.               |
-| customer_id      | INT           | Unique numerical identifier assigned to each customer.                                        |
-| customer_number  | NVARCHAR(50)  | Alphanumeric identifier representing the customer, used for tracking and referencing.         |
-| first_name       | NVARCHAR(50)  | The customer's first name, as recorded in the system.                                         |
-| last_name        | NVARCHAR(50)  | The customer's last name or family name.                                                     |
-| country          | NVARCHAR(50)  | The country of residence for the customer (e.g., 'Australia').                               |
-| marital_status   | NVARCHAR(50)  | The marital status of the customer (e.g., 'Married', 'Single').                              |
-| gender           | NVARCHAR(50)  | The gender of the customer (e.g., 'Male', 'Female', 'n/a').                                  |
-| birthdate        | DATE          | The date of birth of the customer, formatted as YYYY-MM-DD (e.g., 1971-10-06).               |
-| create_date      | DATE          | The date and time when the customer record was created in the system|
+| id               | INT           | Primary key uniquely identifying each employee record.                                         |
+| name             | VARCHAR(255)  | The employees's full name (first and last name), as recorded in the system.                    |
+| seniority        | VARCHAR(50)  | Represents an employee's level or rank within the organization.                               |
+| hourly_rate      | NUMERIC(6,2)  | Specifies the employee's compensation per hour of work.                              |
+| competence       | VARCHAR(255)  | Indicates an employee’s area of expertise.                                  |
+
 
 ---
 
 ### 2. **gold.fact_employees_hours**
-- **Purpose:** 
+- **Purpose:** Captures detailed employee work hour records, including project assignments, approved hours, and related attributes for reporting and analysis.
 - **Columns:**
 
 | Column Name         | Data Type     | Description                                                                                   |
 |---------------------|---------------|-----------------------------------------------------------------------------------------------|
-| product_key         | INT           | Surrogate key uniquely identifying each product record in the product dimension table.         |
-| product_id          | INT           | A unique identifier assigned to the product for internal tracking and referencing.            |
-| product_number      | NVARCHAR(50)  | A structured alphanumeric code representing the product, often used for categorization or inventory. |
-| product_name        | NVARCHAR(50)  | Descriptive name of the product, including key details such as type, color, and size.         |
-| category_id         | NVARCHAR(50)  | A unique identifier for the product's category, linking to its high-level classification.     |
-| category            | NVARCHAR(50)  | The broader classification of the product (e.g., Bikes, Components) to group related items.  |
-| subcategory         | NVARCHAR(50)  | A more detailed classification of the product within the category, such as product type.      |
-| maintenance_required| NVARCHAR(50)  | Indicates whether the product requires maintenance (e.g., 'Yes', 'No').                       |
-| cost                | INT           | The cost or base price of the product, measured in monetary units.                            |
-| product_line        | NVARCHAR(50)  | The specific product line or series to which the product belongs (e.g., Road, Mountain).      |
-| start_date          | DATE          | The date when the product became available for sale or use, stored in|
-
+| id               | INT           | Primary key uniquely identifying each employee record.                                       |
+| name             | VARCHAR(255)  | The employees's full name (first and last name), as recorded in the system.                    |
+| work_date        | DATE          | Date of the recorded work activity.                    |
+| wbs              | VARCHAR(255)  | Work Breakdown Structure code identifying the project or task.                   |
+| daily_approved_hours             | NUMERIC(4,2)  | Number of work hours approved for a single day.                   |
+| total_approved_hours             | NUMERIC(6,2)  | Cumulative approved work hours over a given period.                    |
+| seniority        | VARCHAR(50)  | Represents an employee's level or rank within the organization.                               |
+| hourly_rate      | NUMERIC(6,2)  | Specifies the employee's compensation per hour of work.                              |
+| competence       | VARCHAR(255)  | Indicates an employee’s area of expertise.                                  |
 ---
 
 ### 3. **gold.fact_recent_approved_hours**
-- **Purpose:** 
+- **Purpose:** Stores the most recent approved work hour records for employees, including project codes and work dates, for reporting and tracking purposes.
 - **Columns:**
 
 | Column Name     | Data Type     | Description                                                                                   |
 |-----------------|---------------|-----------------------------------------------------------------------------------------------|
-| order_number    | NVARCHAR(50)  | A unique alphanumeric identifier for each sales order (e.g., 'SO54496').                      |
-| product_key     | INT           | Surrogate key linking the order to the product dimension table.                               |
-| customer_key    | INT           | Surrogate key linking the order to the customer dimension table.                              |
-| order_date      | DATE          | The date when the order was placed.                                                           |
-| shipping_date   | DATE          | The date when the order was shipped to the customer.                                          |
-| due_date        | DATE          | The date when the order payment was due.                                                      |
-| sales_amount    | INT           | The total monetary value of the sale for the line item, in whole currency units (e.g., 25).   |
-| quantity        | INT           | The number of units of the product ordered for the line item (e.g., 1).                       |
-| price           | INT           | The price per unit of the product for the line item, in whole currency units (e.g., 25).      |
+| id               | INT           | Primary key uniquely identifying each employee record.                                       |
+| name             | VARCHAR(255)  | The employees's full name (first and last name), as recorded in the system.                    |
+| work_date        | DATE          | Date of the recorded work activity.                    |
+| wbs              | VARCHAR(255)  | Work Breakdown Structure code identifying the project or task.                   |
+| daily_approved_hours             | NUMERIC(4,2)  | Number of work hours approved for a single day.                   |
+| total_approved_hours             | NUMERIC(6,2)  | Cumulative approved work hours over a given period.                    |
+
 
 ---
 
 ### 4. **gold.fact_time_all**
-- **Purpose:** 
+- **Purpose:** Tracks all recorded employee work hours, including status and project details, for comprehensive time reporting.
 - **Columns:**
 
 | Column Name     | Data Type     | Description                                                                                   |
 |-----------------|---------------|-----------------------------------------------------------------------------------------------|
-| order_number    | NVARCHAR(50)  | A unique alphanumeric identifier for each sales order (e.g., 'SO54496').                      |
-| product_key     | INT           | Surrogate key linking the order to the product dimension table.                               |
-| customer_key    | INT           | Surrogate key linking the order to the customer dimension table.                              |
-| order_date      | DATE          | The date when the order was placed.                                                           |
-| shipping_date   | DATE          | The date when the order was shipped to the customer.                                          |
-| due_date        | DATE          | The date when the order payment was due.                                                      |
-| sales_amount    | INT           | The total monetary value of the sale for the line item, in whole currency units (e.g., 25).   |
-| quantity        | INT           | The number of units of the product ordered for the line item (e.g., 1).                       |
-| price           | INT           | The price per unit of the product for the line item, in whole currency units (e.g., 25).      |
+| id               | INT           | Primary key uniquely identifying each employee record.                                       |
+| name             | VARCHAR(255)  | The employees's full name (first and last name), as recorded in the system.                    |
+| work_date        | DATE          | Date of the recorded work activity.                    |
+| status           | VARCHAR(255)  | Indicates the current state of a record, such as 'Approved' or 'Rejected'.                  |
+| wbs              | VARCHAR(255)  | Work Breakdown Structure code identifying the project or task.                   |
+| wbs_description  | VARCHAR(255)  | Provides a textual description of the project or task associated with the Work Breakdown Structure (WBS) code.                              |
+| hours      | NUMERIC(6,2)  | Captures all work hours (including 'Rejected') for each employee record.                              |
+

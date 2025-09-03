@@ -17,8 +17,8 @@ Usage:
 DROP VIEW IF EXISTS gold.fact_time_all;
 CREATE OR REPLACE VIEW gold.fact_time_all AS
     SELECT
-        mnp.name,
         mnp.nessie AS id,
+        mnp.name,
         mnp.work_date,
         mnp.status,
         mnp.wbs,
@@ -27,8 +27,8 @@ CREATE OR REPLACE VIEW gold.fact_time_all AS
     FROM silver.sap_mnp AS mnp
     UNION
     SELECT
-        inm.name,
         inm.nessie AS id,
+        inm.name,
         inm.work_date,
         inm.status,
         inm.wbs,
@@ -41,8 +41,8 @@ CREATE OR REPLACE VIEW gold.fact_time_all AS
 DROP VIEW IF EXISTS gold.fact_recent_approved_hours;
 CREATE VIEW gold.fact_recent_approved_hours AS
     SELECT
-        name,
         id,
+        name,
         work_date,
         wbs,
         hours AS daily_approved_hours,
@@ -67,8 +67,8 @@ CREATE VIEW gold.dim_employees AS
 DROP VIEW IF EXISTS gold.fact_employees_hours;
 CREATE VIEW gold.fact_employees_hours AS
     SELECT
-        frah.name,
         frah.id,
+        frah.name,
         frah.work_date,
         frah.wbs,
         frah.daily_approved_hours,
