@@ -37,10 +37,10 @@ This document outlines the naming conventions used for schemas, tables, views, c
   - Example: `sap_mnp` → Time booking information from the SAP system.
 
 ### **Gold Rules**
-- All names must use meaningful, business-aligned names for tables, starting with the category prefix.
+- All names must use meaningful names for tables, starting with the category prefix.
 - **`<category>_<entity>`**  
   - `<category>`: Describes the role of the table, such as `dim` (dimension) or `fact` (fact table).  
-  - `<entity>`: Descriptive name of the table, aligned with the business domain (e.g., `time`, `recent_approved_hours`, `employees`).  
+  - `<entity>`: Descriptive name of the table, e.g., `time`, `recent_approved_hours`, `employees`).  
   - Examples:
     - `dim_employees` → Dimension table for employee data.  
     - `fact_time_all` → Fact table containing all employee time transactions.  
