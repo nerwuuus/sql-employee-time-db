@@ -149,7 +149,7 @@
           <mxGeometry x="1047.95" y="390" width="65.9" height="67.97" as="geometry" />
         </mxCell>
         <mxCell id="A1xcLRBUTXrgSNpEkEmB-55" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.vectorlogo.zone/logos/postgresql/postgresql-ar21.svg;" parent="1" vertex="1">
-          <mxGeometry x="400" y="70" width="100" height="50" as="geometry" />
+          <mxGeometry x="400" y="45" width="150" height="75" as="geometry" />
         </mxCell>
         <mxCell id="Pn4QboPf3ZA0Pwuc9z-p-2" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;WFM - Workforce Management database&lt;/font&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="217.69" y="530" width="130" height="30" as="geometry" />
