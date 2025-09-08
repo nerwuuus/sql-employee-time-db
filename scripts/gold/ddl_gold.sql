@@ -80,3 +80,20 @@ CREATE VIEW gold.fact_employees_hours AS
     LEFT JOIN gold.dim_employees AS de
         ON frah.id = de.id
     WHERE de.hourly_rate IS NOT NULL;
+
+-- This script shows 'Approved' hours on WBS between one date and another
+SELECT DISTINCT
+    name,
+        MIN(work_date),
+        MAX(work_date)
+    FROM silver.sap_mnp
+    WHERE 
+        work_date BETWEEN DATE '2025-07-01' AND DATE '2025-08-31'
+        AND status = 'Approved'
+        AND wbs IN (
+            'BL742608400',
+            'BL742608401',
+            'BL742608408',
+            'BL742608999'
+        )
+    GROUP BY name;
