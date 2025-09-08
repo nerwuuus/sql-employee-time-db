@@ -37,7 +37,7 @@ BEGIN
             WHEN status = 'Released for approval' THEN 'Released for approval'
             ELSE 'Approved'
         END,
-        TRIM(COALESCE(wbs, 'N/A')),
+        TRIM(COALESCE(wbs, 'N/A')), -- Remove white spaces from bronze layer
         COALESCE(wbs_description, 'N/A'),
         CASE
             WHEN COALESCE(hours, 0) <= 0 THEN 0
