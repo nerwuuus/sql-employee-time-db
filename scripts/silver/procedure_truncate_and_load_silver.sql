@@ -37,7 +37,7 @@ BEGIN
             WHEN status = 'Released for approval' THEN 'Released for approval'
             ELSE 'Approved'
         END,
-        COALESCE(wbs, 'N/A'),
+        TRIM(COALESCE(wbs, 'N/A')),
         COALESCE(wbs_description, 'N/A'),
         CASE
             WHEN COALESCE(hours, 0) <= 0 THEN 0
@@ -67,7 +67,7 @@ BEGIN
             WHEN status = 'Released for approval' THEN status
             ELSE 'Approved'
         END,
-        COALESCE(wbs, 'N/A'),
+        TRIM(COALESCE(wbs, 'N/A')),
         COALESCE(wbs_description, 'N/A'),
         CASE
             WHEN COALESCE(hours, 0) <= 0 THEN 0
@@ -100,12 +100,12 @@ BEGIN
             ELSE 'Senior'
         END,
         hourly_rate,
-        TRIM(SPLIT_PART(
+        TRIM(SPLIT_PART( -- SPLIT_PART returns the substring preceding the first occurrence of a comma
             COALESCE(competence, 'Unknown'),
             ',',
             1
         )),
-        hourly_rate * 8
+        hourly_rate * 8 
     FROM bronze.wfm_employees
     WHERE
         nessie IS NOT NULL 
