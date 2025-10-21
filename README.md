@@ -48,7 +48,7 @@ Develop a modern PostgreSQL database to consolidate employee time bookings from 
 ```
 sql-employee-time-db/
 │
-├── docs/                               # Project documentation and architecture details
+├── documents/                          # Project documentation and architecture details
 │   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
 │   ├── data_flow.drawio                # Draw.io file for the data flow diagram
 │   ├── naming_convention.md            # Naming guideline
