@@ -1,8 +1,11 @@
  # ess Database Project
 
-This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design. A Python script is used to truncate bronze layer tables and load data into them. Due to the presence of personal data, raw datasets are not available for external use. **Due to the presence of personal data, raw datasets are not available for external use.** This database ensures a well-structured approach to internal time management reporting.<br>
+This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design. **Due to the presence of personal data, raw datasets are not available for external use.**
+* A Python script is used to truncate bronze layer tables and load data into them.
+* This database ensures a well-structured approach to internal time management reporting.
 
 ### 🕰️ Time Management Reporting
+Time Management is an internal operational process designed to monitor and document employees' time registration, work hours, and associated hourly rates. This system ensures accurate tracking of time spent on various tasks and projects, enabling better resource allocation, cost control, and performance analysis. <br>
 Time data is retrieved from SAP and processed through a structured workflow, which involves exporting it to Excel, uploading it to SharePoint, and refreshing it with Power Query. A PostgreSQL database is updated monthly to maintain a centralised, historical record. This setup ensures accurate and consistent reporting, supporting data validation and informed decision-making. <br>
 ### 🗓️ Timeline
 Reports are prepared monthly during the first week after time registration is closed for the previous month. Once closed, timesheets are locked, ensuring data integrity and timely reporting.
