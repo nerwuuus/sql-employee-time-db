@@ -8,7 +8,7 @@ import psycopg2
 
 # Connecting to the PostgreSQL database
 conn = psycopg2.connect(
-    "host=localhost dbname=ess_staging user=postgres password=admin"
+    "host=localhost dbname=ess_staging user=postgres password=(...)"
 )
 cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
 
@@ -18,7 +18,7 @@ cur.execute(
 )
 
 # Load new data from the ess.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.sap_ess
         FROM STDIN
@@ -36,7 +36,7 @@ cur.execute(
 )
 
 # Loading new data from the wfm.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.wfm_employees
         FROM STDIN
@@ -75,3 +75,4 @@ table_name1 = "bronze.sap_ess"
 table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
 print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
+
