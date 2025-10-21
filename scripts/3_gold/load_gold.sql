@@ -82,3 +82,10 @@ CREATE OR REPLACE VIEW gold.fact_current_year AS
         ON w.nessie = s.nessie
     WHERE 
         TO_CHAR(time_registration_date, 'YYYY') = TO_CHAR(NOW(), 'YYYY');
+
+-- List of all WBS, WBS description and subcontract description (flag)
+DROP VIEW IF EXISTS gold.dim_wbs;
+CREATE OR REPLACE VIEW gold.dim_wbs AS
+    SELECT *
+    FROM silver.sap_wbs;
+
