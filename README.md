@@ -13,9 +13,9 @@ Data Flow:
 <img width="999" height="491" alt="Data Flow Diagram" src="https://github.com/user-attachments/assets/fb92e0b9-17ae-43ac-9c68-fb5d19f279d7" />
 
 <br>
-1. **Bronze Layer**: Stores raw data from the source systems. Data is loaded from .csv files into a PostgreSQL database using the '/copy' command in pgAdmin4 or running the Python script.<br>
-2. **Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.<br>
-3. **Gold Layer**: Contains business-ready data structured in a star schema to support reporting and analytics.<br>
+1.**Bronze Layer**: Stores raw data from the source systems. Data is loaded from .csv files into a PostgreSQL database using the '/copy' command in pgAdmin4 or running the Python script.<br>
+2.**Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.<br>
+3.**Gold Layer**: Contains business-ready data structured in a star schema to support reporting and analytics.<br>
 
 ---
 ## 📖 Project Overview
