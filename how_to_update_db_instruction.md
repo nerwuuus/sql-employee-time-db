@@ -17,7 +17,7 @@ import psycopg2
 
 # Connecting to the PostgreSQL database
 conn = psycopg2.connect(
-    "host=localhost dbname=ess_staging user=postgres password=(...)"
+    "host=(...) dbname=ess user=(...) password=(...)"
 )
 cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
 
@@ -198,4 +198,5 @@ END;
 $$;
 
 ```
+
 
