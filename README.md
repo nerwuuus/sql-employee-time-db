@@ -1,6 +1,11 @@
  # ess Database Project
 
-This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design. A Python script is used to truncate bronze layer tables and load data into them. Due to the presence of personal data, raw datasets are not available for external use. **Due to the presence of personal data, raw datasets are not available for external use.**
+This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design. A Python script is used to truncate bronze layer tables and load data into them. Due to the presence of personal data, raw datasets are not available for external use. **Due to the presence of personal data, raw datasets are not available for external use.** This database ensures a well-structured approach to internal time management reporting.<br>
+
+**Time Management Reporting**
+Time data is retrieved from SAP via ESS and processed through a structured workflow: exported to Excel, uploaded to SharePoint, and refreshed with Power Query. A SQL database is updated monthly to maintain a centralised, historical record. This setup ensures accurate, consistent reporting and supports data validation and decision-making. <br>
+**Timeline**
+Reports are prepared monthly during the first week after ESS closes the previous month. Once closed, timesheets are locked, ensuring data integrity and timely reporting.
 
 ---
 ## 🏗️ Data Architecture
@@ -42,7 +47,6 @@ Develop a modern PostgreSQL database to consolidate employee time bookings from 
 - **Documentation**: Provide clear documentation of the data model.
 
 ---
-
 ## 📂 Repository Structure
 ```
 sql-employee-time-db/
