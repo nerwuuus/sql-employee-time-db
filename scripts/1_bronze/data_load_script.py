@@ -8,7 +8,7 @@ import psycopg2
 
 # Connecting to the PostgreSQL database
 conn = psycopg2.connect(
-    "host=localhost dbname=ess_staging user=postgres password=(...)"
+    "host=(...) dbname=ess_staging user=(...) password=(...)"
 )
 cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
 
@@ -75,4 +75,5 @@ table_name1 = "bronze.sap_ess"
 table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
 print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
+
 
