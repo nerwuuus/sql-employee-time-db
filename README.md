@@ -5,7 +5,6 @@ This portfolio project showcases a comprehensive database solution designed for 
 
 ---
 ## 🏗️ Data Architecture
-
 The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
 <img width="971" height="586" alt="HLD Architecture" src="https://github.com/user-attachments/assets/9619ff89-3da0-46c9-9bf1-1b66ba1c434a" />
 <br>
@@ -13,7 +12,8 @@ The data architecture for this project follows Medallion Architecture **Bronze**
 2. **Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.<br>
 3. **Gold Layer**: Contains business-ready data structured in a star schema to support reporting and analytics.<br>
 
-Data Flow:
+---
+## ↔️ Data Flow
 <img width="999" height="491" alt="Data Flow Diagram" src="https://github.com/user-attachments/assets/fb92e0b9-17ae-43ac-9c68-fb5d19f279d7" />
 
 ---
