@@ -61,6 +61,8 @@ sql-employee-time-db/
 │
 ├── tests/                              # Test scripts and quality files
 │
+├── README.md                           # About the project
+│                           
 ├── how_to_update_db_instruction.md     # Project overview and instructions
 
 ```
