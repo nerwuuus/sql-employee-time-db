@@ -1,7 +1,7 @@
 ''' 
 ============================================================================
 Open PowerShell and download psycopg2: pip install psycopg2.
-Run the below script.
+Run the script below.
 ============================================================================ 
 '''
 # Importing the psycopg2 library
@@ -9,7 +9,7 @@ import psycopg2
 
 # Connecting to the PostgreSQL database
 conn = psycopg2.connect(
-    "host=localhost dbname=ess_staging user=postgres password=admin"
+    "host=(..) dbname=ess_staging user=(..) password=(..)"
 )
 cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
 
@@ -19,7 +19,7 @@ cur.execute(
 )
 
 # Load new data from the ess.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(..)\OneDrive - (..)\Desktop\ess.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.sap_ess_staging
         FROM STDIN
@@ -37,7 +37,7 @@ cur.execute(
 )
 
 # Loading new data from the wfm.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(..)\OneDrive - (..)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.wfm_employees_staging
         FROM STDIN
@@ -58,3 +58,4 @@ conn.close() # close the connection to the PostgreSQL database
 table_name1 = "bronze.sap_ess_staging"
 table_name2 = "bronze.wfm_employees_staging"
 print(f"Data was loaded successfully to the table {table_name1} and {table_name2}")
+
