@@ -1,10 +1,10 @@
 # Work instruction
 ## 1. Update ess.xlsx
-Instructions on how to update ess.xlsx report: https://atos365.sharepoint.com/:w:/r/sites/EurocontrolMNPAMO/Shared%20Documents/AMO/MNP%20Time%20Management/Eurocontrol%20MNP%20Time%20Management%20Reporting.docx?d=w4bf064b9ffa24bd4a72edd7579cfa302&csf=1&web=1&e=XmjI6i
+Instructions on how to update ess.xlsx report: https://(...).sharepoint.com/:w:/r/(...)/(...)
 
 ## 2. Export ess.xlsx and wfm.xlsx
-* Save ess.xlsx file as ess.csv file. Do the same with the WFM file.
-* Open ess.xlsx file and change data format (column C) to YYYY-MM-DD. Ensure that in the column G floats use '.' as separator instead of ',', and column nessie (column B) is INT data type - remove any floats if necessary.
+* Save the ess.xlsx file as the ess.csv file. Do the same with the WFM file.
+* Open the ess.xlsx file and change the data format (column C) to YYYY-MM-DD. Ensure that in column G floats use '.' as a separator instead of ',', and column nessie (column B) is an INT data type - remove any floats if necessary.
 * Run this Python script to truncate bronze layer tables and load data into bronze layer tables:
 ```Python
 # ============================================================================
@@ -17,7 +17,7 @@ import psycopg2
 
 # Connecting to the PostgreSQL database
 conn = psycopg2.connect(
-    "host=localhost dbname=ess_staging user=postgres password=admin"
+    "host=localhost dbname=ess_staging user=postgres password=(...)"
 )
 cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
 
@@ -27,7 +27,7 @@ cur.execute(
 )
 
 # Load new data from the ess.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.sap_ess
         FROM STDIN
@@ -45,7 +45,7 @@ cur.execute(
 )
 
 # Loading new data from the wfm.csv file
-with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
     cur.copy_expert("""
         COPY bronze.wfm_employees
         FROM STDIN
@@ -85,7 +85,7 @@ table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
 print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
 ```
-## 3. Call the below procedure to truncate silver tables and load a new data into silver layer
+## 3. Call the procedure below to truncate silver tables and load new data into the silver layer
 
 ```sql
 CALL silver.truncate_and_load_silver();
@@ -198,3 +198,4 @@ END;
 $$;
 
 ```
+
