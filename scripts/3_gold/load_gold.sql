@@ -13,6 +13,7 @@ Usage:
 - These views can be queried directly for analytics and reporting.
 ============================================================================
 */
+
 -- Registered hours from last month (dynamic script) integrated with WFM data
 DROP VIEW IF EXISTS gold.fact_last_month;
 CREATE OR REPLACE VIEW gold.fact_last_month AS
@@ -35,7 +36,6 @@ CREATE OR REPLACE VIEW gold.fact_last_month AS
         ON w.nessie = s.nessie
     WHERE 
         TO_CHAR(time_registration_date, 'YYYY-MM') = TO_CHAR(date_trunc('month', CURRENT_DATE) - INTERVAL '1 month', 'YYYY-MM');
-
 
 
 -- Registered hours from 2022 until last month and integrated with WFM data
@@ -83,9 +83,11 @@ CREATE OR REPLACE VIEW gold.fact_current_year AS
     WHERE 
         TO_CHAR(time_registration_date, 'YYYY') = TO_CHAR(NOW(), 'YYYY');
 
+
 -- List of all WBS, WBS description and subcontract description (flag)
 DROP VIEW IF EXISTS gold.dim_wbs;
 CREATE OR REPLACE VIEW gold.dim_wbs AS
     SELECT *
     FROM silver.sap_wbs;
+
 
