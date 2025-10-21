@@ -68,8 +68,8 @@ CREATE TABLE silver.wfm_employees_staging (
             WARNING !!!
 =====================================
 Error 'Permission denied' while uploading data. Paste the code below in pgAdmin4, PSQL Tool to load data manually:
-    \copy bronze.sap_ess FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8');
-    \copy bronze.wfm_employees FROM 'C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8'); 
+    \copy bronze.sap_ess FROM 'C:\Users\(..)\OneDrive - (..)\Desktop\ess.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8');
+    \copy bronze.wfm_employees FROM 'C:\Users\(..)\OneDrive - (..)\Desktop\wfm.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8'); 
 */
 -- Perform the full load on bronze tables 
 TRUNCATE TABLE bronze.sap_ess_staging;
@@ -155,4 +155,5 @@ SELECT
         ELSE 'Active'
     END AS active_flag
 FROM bronze.wfm_employees_staging;
+
 
