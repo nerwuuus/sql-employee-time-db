@@ -48,21 +48,20 @@ Develop a modern PostgreSQL database to consolidate employee time bookings from 
 ```
 sql-employee-time-db/
 │
-├── docs/                               # Project documentation and architecture details
+├── documents/                          # Project documentation and architecture details
 │   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
 │   ├── data_flow.drawio                # Draw.io file for the data flow diagram
-│   ├── data_model.drawio               # Draw.io file for data model (star schema)
 │   ├── naming_convention.md            # Naming guideline
 │   ├── data_catalog.md                 # Catalog of datasets
 │
 ├── scripts/                            # SQL scripts for ETL and transformations
-│   ├── bronze/                         # Scripts for extracting and loading raw data
-│   ├── silver/                         # Scripts for cleaning and transforming data
-│   ├── gold/                           # Scripts for creating analytical models
+│   ├── 1_bronze/                       # Scripts for extracting and loading raw data
+│   ├── 2_silver/                       # Scripts for cleaning and transforming data
+│   ├── 3_gold/                         # Scripts for creating analytical models
 │
 ├── tests/                              # Test scripts and quality files
 │
-├── README.md                           # Project overview and instructions
+├── how_to_update_db_instruction.md     # Project overview and instructions
 
 ```
 ---
