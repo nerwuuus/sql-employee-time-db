@@ -13,18 +13,18 @@ Data Flow:
 <img width="999" height="491" alt="Data Flow Diagram" src="https://github.com/user-attachments/assets/fb92e0b9-17ae-43ac-9c68-fb5d19f279d7" />
 
 <br>
-1. **Bronze Layer**: Stores raw data from the source systems. Data is loaded from .csv files into a PostgreSQL database using the '/copy' command in pgAdmin4.
-2. **Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.
-3. **Gold Layer**: Contains business-ready data structured in a star schema to support reporting and analytics.
+1. **Bronze Layer**: Stores raw data from the source systems. Data is loaded from .csv files into a PostgreSQL database using the '/copy' command in pgAdmin4 or running the Python script.<br>
+2. **Silver Layer**: This layer includes data cleansing, standardisation, and normalisation processes to prepare data for analysis.<br>
+3. **Gold Layer**: Contains business-ready data structured in a star schema to support reporting and analytics.<br>
 
 ---
 ## 📖 Project Overview
 
 This project involves:
 
-1. **Data Architecture**: Designing a modern database architecture based on the Medallion model, incorporating **Bronze**, **Silver**, and **Gold** layers.
-2. **ETL Pipelines**: Extracting, transforming, and loading data from source systems into a centralised database for analysis and reporting.
-3. **Data Modelling**: Developing fact and dimension tables designed for efficient analytical querying within a star schema.
+1. **Data Architecture**: Designing a modern database architecture based on the Medallion model, incorporating **Bronze**, **Silver**, and **Gold** layers.<br>
+2. **ETL Pipelines**: Extracting, transforming, and loading data from source systems into a centralised database for analysis and reporting.<br>
+3. **Data Modelling**: Developing fact and dimension tables designed for efficient analytical querying within a star schema.<br>
 4. **Analytics & Reporting**: Creating SQL-based reports and dashboards to deliver actionable business insights.
 
 ---
