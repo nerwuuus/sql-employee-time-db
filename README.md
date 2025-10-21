@@ -1,7 +1,6 @@
  # ess Database Project
 
-This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design.
-<br>**Due to the presence of personal data, raw datasets are not available for external use.**
+This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It follows industry best practices in data engineering, including the use of the Medallion architecture and star schema design. A Python script is used to truncate bronze layer tables and load data into them. Due to the presence of personal data, raw datasets are not available for external use. **Due to the presence of personal data, raw datasets are not available for external use.**
 
 ---
 ## 🏗️ Data Architecture
