@@ -7,7 +7,7 @@ Instructions on how to update ess.xlsx report using PowerQuery: https://(...).sh
 * Open ess.xlsx file and change the data format (column C) to YYYY-MM-DD. Ensure that in column G floats use '.' as a separator instead of ',', and column nessie (column B) is an INT data type - remove any floats if necessary.
 
 ## 3. Load data into the bronze layer
-* Run this Python script to truncate bronze layer tables and load data into bronze layer tables:
+Run Python script to truncate bronze layer tables and load data into bronze layer tables:
 ```Python
 # ============================================================================
 # Open PowerShell and download psycopg2: pip install psycopg2.
@@ -87,7 +87,7 @@ finally:
         conn.close()
 ```
 ## 4. Load data into the silver layer
-* Truncate and load the data into the silver layer using a procedure.
+Truncate and load the data into the silver layer using a procedure.
 
 ```sql
 CALL silver.truncate_and_load_silver();
@@ -200,6 +200,7 @@ END;
 $$;
 
 ```
+
 
 
 
