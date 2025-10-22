@@ -1,6 +1,6 @@
 # Work instruction
 ## 1. Update ess.xlsx
-Instructions on how to update ess.xlsx report: https://(...).sharepoint.com/:w:/r/sites/(...)
+Instructions on how to update ess.xlsx report using PowerQuery: https://(...).sharepoint.com/:w:/r/sites/(...)
 
 ## 2. Export ess.xlsx and wfm.xlsx
 * Save ess.xlsx file as ess.csv file. Do the same with the WFM file.
@@ -197,4 +197,5 @@ END;
 $$;
 
 ```
+
 
