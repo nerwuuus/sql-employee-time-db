@@ -86,7 +86,8 @@ finally:
     if 'conn' in locals():
         conn.close()
 ```
-## 4. Call the procedure below to truncate silver tables and load new data into the silver layer
+## 4. Load data into the silver layer
+* Truncate and load the data into the silver layer using a procedure.
 
 ```sql
 CALL silver.truncate_and_load_silver();
@@ -199,6 +200,7 @@ END;
 $$;
 
 ```
+
 
 
 
