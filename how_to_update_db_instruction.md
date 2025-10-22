@@ -5,6 +5,8 @@ Instructions on how to update ess.xlsx report using PowerQuery: https://(...).sh
 ## 2. Export ess.xlsx and wfm.xlsx
 * Save ess.xlsx file as ess.csv file. Do the same with the WFM file.
 * Open ess.xlsx file and change the data format (column C) to YYYY-MM-DD. Ensure that in column G floats use '.' as a separator instead of ',', and column nessie (column B) is an INT data type - remove any floats if necessary.
+
+## 3. Load data into the bronze layer
 * Run this Python script to truncate bronze layer tables and load data into bronze layer tables:
 ```Python
 # ============================================================================
@@ -84,7 +86,7 @@ finally:
     if 'conn' in locals():
         conn.close()
 ```
-## 3. Call the procedure below to truncate silver tables and load new data into the silver layer
+## 4. Call the procedure below to truncate silver tables and load new data into the silver layer
 
 ```sql
 CALL silver.truncate_and_load_silver();
@@ -197,6 +199,7 @@ END;
 $$;
 
 ```
+
 
 
 
