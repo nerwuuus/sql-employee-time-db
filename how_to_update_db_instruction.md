@@ -1,10 +1,10 @@
 # Work instruction
 ## 1. Update ess.xlsx
-Instructions on how to update ess.xlsx report: https://(...).sharepoint.com/:w:/r/(...)/(...)
+Instructions on how to update ess.xlsx report: https://atos365.sharepoint.com/:w:/r/sites/EurocontrolMNPAMO/Shared%20Documents/AMO/MNP%20Time%20Management/Eurocontrol%20MNP%20Time%20Management%20Reporting.docx?d=w4bf064b9ffa24bd4a72edd7579cfa302&csf=1&web=1&e=XmjI6i
 
 ## 2. Export ess.xlsx and wfm.xlsx
-* Save the ess.xlsx file as the ess.csv file. Do the same with the WFM file.
-* Open the ess.xlsx file and change the data format (column C) to YYYY-MM-DD. Ensure that in column G floats use '.' as a separator instead of ',', and column nessie (column B) is an INT data type - remove any floats if necessary.
+* Save ess.xlsx file as ess.csv file. Do the same with the WFM file.
+* Open ess.xlsx file and change data format (column C) to YYYY-MM-DD. Ensure that in the column G floats use '.' as separator instead of ',', and column nessie (column B) is INT data type - remove any floats if necessary.
 * Run this Python script to truncate bronze layer tables and load data into bronze layer tables:
 ```Python
 # ============================================================================
@@ -15,77 +15,76 @@ Instructions on how to update ess.xlsx report: https://(...).sharepoint.com/:w:/
 # Importing the psycopg2 library
 import psycopg2
 
-# Connecting to the PostgreSQL database
-conn = psycopg2.connect(
-    "host=(...) dbname=ess user=(...) password=(...)"
-)
-cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
-
-# Truncating the first table bronze.sap_ess
-cur.execute(
-    "TRUNCATE TABLE bronze.sap_ess;"
-)
-
-# Load new data from the ess.csv file
-with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
-    cur.copy_expert("""
-        COPY bronze.sap_ess
-        FROM STDIN
-        WITH (
-            FORMAT csv,
-            HEADER true,
-            DELIMITER ';',
-            ENCODING 'UTF8'
-        )
-    """, f)
-
-# Truncating the second table bronze.wfm_employees
-cur.execute(
-    "TRUNCATE TABLE bronze.wfm_employees;"
-)
-
-# Loading new data from the wfm.csv file
-with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
-    cur.copy_expert("""
-        COPY bronze.wfm_employees
-        FROM STDIN
-        WITH (
-            FORMAT csv,
-            HEADER true,
-            DELIMITER ';',
-            ENCODING 'UTF8'
-        )
-    """, f)
-
-# Truncating the third table bronze.sap_wbs
-cur.execute(
-    "TRUNCATE TABLE bronze.sap_wbs;"
-)
-
-# Loading new data from bronze.sap_ess table into bronze.sap_wbs
-cur.execute(
-    """INSERT INTO bronze.sap_wbs (
-        wbs,
-        wbs_description
-    )
-    SELECT DISTINCT
-        wbs,
-        wbs_description
-    FROM bronze.sap_ess;"""
-)
-
-# Committing changes and closing the connection
-conn.commit() # commit all changes made
-cur.close() # close the cursor 
-conn.close() # close the connection to the PostgreSQL database
-
-# Printing a success message
+# Table names for logging
 table_name1 = "bronze.sap_ess"
 table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
-print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
+
+try:
+    # Connecting to the PostgreSQL database
+    conn = psycopg2.connect(
+        "host=localhost dbname=ess_staging user=postgres password=admin"
+    )
+    cur = conn.cursor()  # Creates a cursor object to execute PostgreSQL commands
+
+    # Truncating and loading data into bronze.sap_ess
+    cur.execute(f"TRUNCATE TABLE {table_name1};")
+    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
+        cur.copy_expert(f"""
+            COPY {table_name1}
+            FROM STDIN
+            WITH (
+                FORMAT csv,
+                HEADER true,
+                DELIMITER ';',
+                ENCODING 'UTF8'
+            )
+        """, f)
+
+    # Truncating and loading data into bronze.wfm_employees
+    cur.execute(f"TRUNCATE TABLE {table_name2};")
+    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+        cur.copy_expert(f"""
+            COPY {table_name2}
+            FROM STDIN
+            WITH (
+                FORMAT csv,
+                HEADER true,
+                DELIMITER ';',
+                ENCODING 'UTF8'
+            )
+        """, f)
+
+    # Truncating and loading data into bronze.sap_wbs
+    cur.execute(f"TRUNCATE TABLE {table_name3};")
+    cur.execute(f"""
+        INSERT INTO {table_name3} (
+            wbs,
+            wbs_description
+        )
+        SELECT DISTINCT
+            wbs,
+            wbs_description
+        FROM {table_name1};
+    """)
+
+    # Committing changes
+    conn.commit()
+    print(f"Data was loaded successfully to the tables: {table_name1}, {table_name2}, and {table_name3}.")
+
+except Exception as e:
+    # Rollback in case of error
+    conn.rollback()
+    print("An error occurred during the data load process:", e)
+
+finally:
+    # Closing resources
+    if 'cur' in locals():
+        cur.close()
+    if 'conn' in locals():
+        conn.close()
 ```
-## 3. Call the procedure below to truncate silver tables and load new data into the silver layer
+## 3. Call the below procedure to truncate silver tables and load a new data into silver layer
 
 ```sql
 CALL silver.truncate_and_load_silver();
@@ -198,5 +197,3 @@ END;
 $$;
 
 ```
-
-
