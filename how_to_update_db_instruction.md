@@ -23,7 +23,7 @@ table_name3 = "bronze.sap_wbs"
 try:
     # Connecting to the PostgreSQL database
     conn = psycopg2.connect(
-        "host=localhost dbname=ess_staging user=postgres password=admin"
+        "host=(...) dbname=ess user=(...) password=(...)"
     )
     cur = conn.cursor()  # Creates a cursor object to execute PostgreSQL commands
 
@@ -197,5 +197,6 @@ END;
 $$;
 
 ```
+
 
 
