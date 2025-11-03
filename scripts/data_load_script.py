@@ -5,79 +5,78 @@
 # First time run:
 # 1) Open PowerShell and download psycopg2: pip install psycopg2.
 # 2) Run the below script.
+# ============================================================================
+# In short:
+# try: → Attempt the main logic.
+# except: → Handle errors and undo changes with rollback().
+# finally: → Close database resources safely.
 # ============================================================================ 
 
 # Importing the psycopg2 library
 import psycopg2
 
-# Connecting to the PostgreSQL database
-conn = psycopg2.connect(
-    "host=(...) dbname=ess_staging user=(...) password=(...)"
-)
-cur = conn.cursor() # Creates a cursor object (cur) to execute PostgreSQL commands
-
-# Truncating the first table bronze.sap_ess
-cur.execute(
-    "TRUNCATE TABLE bronze.sap_ess;"
-)
-
-# Load new data from the ess.csv file
-with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
-    cur.copy_expert("""
-        COPY bronze.sap_ess
-        FROM STDIN
-        WITH (
-            FORMAT csv,
-            HEADER true,
-            DELIMITER ';',
-            ENCODING 'UTF8'
-        )
-    """, f)
-
-# Truncating the second table bronze.wfm_employees
-cur.execute(
-    "TRUNCATE TABLE bronze.wfm_employees;"
-)
-
-# Loading new data from the wfm.csv file
-with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
-    cur.copy_expert("""
-        COPY bronze.wfm_employees
-        FROM STDIN
-        WITH (
-            FORMAT csv,
-            HEADER true,
-            DELIMITER ';',
-            ENCODING 'UTF8'
-        )
-    """, f)
-
-# Truncating the third table bronze.sap_wbs
-cur.execute(
-    "TRUNCATE TABLE bronze.sap_wbs;"
-)
-
-# Loading new data from bronze.sap_ess table into bronze.sap_wbs
-cur.execute(
-    """INSERT INTO bronze.sap_wbs (
-        wbs,
-        wbs_description
-    )
-    SELECT DISTINCT
-        wbs,
-        wbs_description
-    FROM bronze.sap_ess;"""
-)
-
-# Committing changes and closing the connection
-conn.commit() # commit all changes made
-cur.close() # close the cursor 
-conn.close() # close the connection to the PostgreSQL database
-
-# Printing a success message
+# Define table names where data will be truncated and loaded
 table_name1 = "bronze.sap_ess"
 table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
-print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
 
+try: # try block contains a code that might raise an error. If everything runs fine, the except block is skipped
+    # Connecting to the PostgreSQL database
+    conn = psycopg2.connect(
+        "host=(...) dbname=(...) user=(...) password=(...)"
+    )
+    cur = conn.cursor()  # Creates a cursor object to execute PostgreSQL commands
+    # Truncating and loading data into bronze.sap_ess
+    cur.execute(f"TRUNCATE TABLE {table_name1};")
+    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
+        cur.copy_expert(f"""
+            COPY {table_name1}
+            FROM STDIN
+            WITH (
+                FORMAT csv,
+                HEADER true,
+                DELIMITER ';',
+                ENCODING 'UTF8'
+            )
+        """, f)
+    # Truncating and loading data into bronze.wfm_employees
+    cur.execute(f"TRUNCATE TABLE {table_name2};")
+    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+        cur.copy_expert(f"""
+            COPY {table_name2}
+            FROM STDIN
+            WITH (
+                FORMAT csv,
+                HEADER true,
+                DELIMITER ';',
+                ENCODING 'UTF8'
+            )
+        """, f)
+    # Truncating and loading data into bronze.sap_wbs
+    cur.execute(f"TRUNCATE TABLE {table_name3};")
+    cur.execute(f"""
+        INSERT INTO {table_name3} (
+            wbs,
+            wbs_description
+        )
+        SELECT DISTINCT
+            wbs,
+            wbs_description
+        FROM {table_name1};
+    """)
+    # Committing changes to the ess database
+    conn.commit()
+    print(f"Data was loaded successfully to the tables: {table_name1}, {table_name2}, and {table_name3}.")
 
+except Exception as e: # Executes only if an error occurs inside the try block and captures the error details in the variable e
+    # Rollback in case if an error occurs
+    # If something goes wrong before commit(), calling rollback() undoes all changes made in the current transaction, restoring the database to its previous state
+    conn.rollback()
+    print("An error occurred during the data load process:", e)
+
+finally: # this block runs no matter what happens (success or error)
+    # Closing the cursor and connection
+    if 'cur' in locals():
+        cur.close()
+    if 'conn' in locals():
+        conn.close()
