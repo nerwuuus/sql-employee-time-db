@@ -1,10 +1,10 @@
-# ============================================================================
-# Install SQl libraries using Power Shell:
+# ====================================================================================
+# Install SQL libraries using PowerShell:
 #   pip install sqlalchemy
 #   pip install sqlalchemy pg8000
-# SQL Alchemy provides an abstraction layer for database connections.   
-# PG8000 a lightweight library to connect Python with Postgres.
-# ============================================================================
+# SQLAlchemy: Python library for database access and ORM (Object Relational Mapping).
+# PG8000: Pure-Python driver for connecting to PostgreSQL databases.
+# ====================================================================================
 
 # importing libraries
 from sqlalchemy import create_engine
