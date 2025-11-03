@@ -7,31 +7,38 @@
 # ============================================================================
 
 # importing libraries
+from sqlalchemy import create_engine
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
 # PostgreSQL connection details
-username = '(...)'
-password = '(...)'
-host = '(...)'
-port = '(...)'
+username = 'postgres'
+password = 'admin'
+host = 'localhost'
+port = '5432'
 database = 'ess'
 
-# create connection
-database = f'postgresql+pg8000://{username}:{password}@{host}:{port}/{database}'
+# create connection using create_engine (which acts as the main interface between Python code and the database)
+engine = create_engine(
+    f'postgresql+pg8000://{username}:{password}@{host}:{port}/{database}'
+    )
 
 # fetch the data from PostgreSQL server - bronze layer (raw data)
-df = pd.read_sql(
-    'SELECT *' 
-    'FROM bronze.sap_ess',
-    database
+df_bronze = pd.read_sql(
+    'SELECT * FROM bronze.sap_ess',
+    con=engine # con=engine in pd.read_sql() tells pandas which database connection to use when executing the SQL query
 )
 # validate the output
 # expected result: (number of rows, number of columns)
-print(df.shape)
+print(df_bronze.shape)
 # preview the data
 # output: first 5 rows of the table
-print(df.head())
+print(df_bronze.head())
 # inspect df
-print(df.info())
+print(df_bronze.info())
+
+# fetch the data from PostgreSQL server - gold layer (processed data)
+df_gold_last_month = pd.read_sql(
+    'SELECT * FROM gold.fact_last_month',
+    con=engine 
+)
