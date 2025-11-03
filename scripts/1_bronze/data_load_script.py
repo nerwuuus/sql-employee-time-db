@@ -1,6 +1,7 @@
 # ============================================================================
-# Open PowerShell and download psycopg2: pip install psycopg2.
-# Run the below script.
+# First time run:
+# 1) Open PowerShell and download psycopg2: pip install psycopg2.
+# 2) Run the below script.
 # ============================================================================ 
 
 # Importing the psycopg2 library
@@ -75,5 +76,6 @@ table_name1 = "bronze.sap_ess"
 table_name2 = "bronze.wfm_employees"
 table_name3 = "bronze.sap_wbs"
 print(f"Data was loaded successfully to the table {table_name1}, {table_name2} and {table_name3}.")
+
 
 
