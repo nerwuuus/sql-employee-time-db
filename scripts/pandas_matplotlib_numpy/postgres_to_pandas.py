@@ -21,11 +21,17 @@ database = 'ess'
 # create connection
 database = f'postgresql+pg8000://{username}:{password}@{host}:{port}/{database}'
 
-# fetch the data from PostgreSQL server
+# fetch the data from PostgreSQL server - bronze layer (raw data)
 df = pd.read_sql(
     'SELECT *' 
-    'FROM silver.sap_ess',
+    'FROM bronze.sap_ess',
     database
 )
-
-print(df)
+# validate the output
+# expected result: (number of rows, number of columns)
+print(df.shape)
+# preview the data
+# output: first 5 rows of the table
+print(df.head())
+# inspect df
+print(df.info())
