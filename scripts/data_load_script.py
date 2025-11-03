@@ -1,4 +1,7 @@
 # ============================================================================
+# This script is a Python ETL (Extract, Transform, Load) process using 
+# the psycopg2 library to interact with a PostgreSQL database.
+# ============================================================================
 # First time run:
 # 1) Open PowerShell and download psycopg2: pip install psycopg2.
 # 2) Run the below script.
