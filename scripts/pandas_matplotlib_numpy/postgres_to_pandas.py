@@ -23,22 +23,22 @@ engine = create_engine(
     f'postgresql+pg8000://{username}:{password}@{host}:{port}/{database}'
     )
 
-# fetch the data from PostgreSQL server - bronze layer (raw data)
-df_bronze = pd.read_sql(
+# fetch the data from PostgreSQL ess server - bronze layer (raw data)
+df_ess_bronze = pd.read_sql(
     'SELECT * FROM bronze.sap_ess',
     con=engine # con=engine in pd.read_sql() tells pandas which database connection to use when executing the SQL query
 )
 # validate the output
 # expected result: (number of rows, number of columns)
-print(df_bronze.shape)
+print(df_ess_bronze.shape)
 # preview the data
 # output: first 5 rows of the table
-print(df_bronze.head())
+print(df_ess_bronze.head())
 # inspect df
-print(df_bronze.info())
+print(df_ess_bronze.info())
 
 # fetch the data from PostgreSQL server - gold layer (processed data)
-df_gold_last_month = pd.read_sql(
+df_ess_gold = pd.read_sql(
     'SELECT * FROM gold.fact_last_month',
     con=engine 
 )
