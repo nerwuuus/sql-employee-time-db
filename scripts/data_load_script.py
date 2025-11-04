@@ -3,13 +3,13 @@
 # the psycopg2 library to interact with a PostgreSQL database.
 # ============================================================================
 # First time run:
-# 1) Open PowerShell and download psycopg2: pip install psycopg2.
-# 2) Run the below script.
+#   1) Open PowerShell and download psycopg2: pip install psycopg2.
+#   2) Run the below script.
 # ============================================================================
 # In short:
-# try: → Attempt the main logic.
-# except: → Handle errors and undo changes with rollback().
-# finally: → Close database resources safely.
+#   try: → Attempt the main logic.
+#   except: → Handle errors and undo changes with rollback().
+#   finally: → Close database resources safely.
 # ============================================================================ 
 
 # Importing the psycopg2 library
@@ -23,12 +23,12 @@ table_name3 = "bronze.sap_wbs"
 try: # try block contains a code that might raise an error. If everything runs fine, the except block is skipped
     # Connecting to the PostgreSQL database
     conn = psycopg2.connect(
-        "host=(...) dbname=(...) user=(...) password=(...)"
+        "host=localhost dbname=ess user=postgres password=admin"
     )
     cur = conn.cursor()  # Creates a cursor object to execute PostgreSQL commands
     # Truncating and loading data into bronze.sap_ess
     cur.execute(f"TRUNCATE TABLE {table_name1};")
-    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
+    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
         cur.copy_expert(f"""
             COPY {table_name1}
             FROM STDIN
@@ -41,7 +41,7 @@ try: # try block contains a code that might raise an error. If everything runs f
         """, f)
     # Truncating and loading data into bronze.wfm_employees
     cur.execute(f"TRUNCATE TABLE {table_name2};")
-    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
         cur.copy_expert(f"""
             COPY {table_name2}
             FROM STDIN
@@ -69,7 +69,6 @@ try: # try block contains a code that might raise an error. If everything runs f
     print(f"Data was loaded successfully to the tables: {table_name1}, {table_name2}, and {table_name3}.")
 
 except Exception as e: # Executes only if an error occurs inside the try block and captures the error details in the variable e
-    # Rollback in case if an error occurs
     # If something goes wrong before commit(), calling rollback() undoes all changes made in the current transaction, restoring the database to its previous state
     conn.rollback()
     print("An error occurred during the data load process:", e)
