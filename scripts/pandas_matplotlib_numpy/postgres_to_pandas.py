@@ -12,10 +12,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # PostgreSQL connection details
-username = 'postgres'
-password = 'admin'
-host = 'localhost'
-port = '5432'
+username = '(...)'
+password = '(...)'
+host = '(...)'
+port = '(...)'
 database = 'ess'
 
 # create connection using create_engine (which acts as the main interface between Python code and the database)
