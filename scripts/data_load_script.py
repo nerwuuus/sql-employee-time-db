@@ -23,12 +23,12 @@ table_name3 = "bronze.sap_wbs"
 try: # try block contains a code that might raise an error. If everything runs fine, the except block is skipped
     # Connecting to the PostgreSQL database
     conn = psycopg2.connect(
-        "host=localhost dbname=ess user=postgres password=admin"
+        "host=(...) dbname=ess user=(...) password=(...)"
     )
     cur = conn.cursor()  # Creates a cursor object to execute PostgreSQL commands
     # Truncating and loading data into bronze.sap_ess
     cur.execute(f"TRUNCATE TABLE {table_name1};")
-    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\ess.csv", "r", encoding="utf-8") as f:
+    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\ess.csv", "r", encoding="utf-8") as f:
         cur.copy_expert(f"""
             COPY {table_name1}
             FROM STDIN
@@ -41,7 +41,7 @@ try: # try block contains a code that might raise an error. If everything runs f
         """, f)
     # Truncating and loading data into bronze.wfm_employees
     cur.execute(f"TRUNCATE TABLE {table_name2};")
-    with open(r"C:\Users\a817628\OneDrive - ATOS\Desktop\wfm.csv", "r", encoding="utf-8") as f:
+    with open(r"C:\Users\(...)\OneDrive - (...)\Desktop\wfm.csv", "r", encoding="utf-8") as f:
         cur.copy_expert(f"""
             COPY {table_name2}
             FROM STDIN
