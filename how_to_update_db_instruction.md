@@ -2,11 +2,91 @@
 ## 1. Update ess.xlsx
 Instructions on how to update ess.xlsx report using PowerQuery: https://(...).sharepoint.com/:w:/r/sites/(...)
 
-## 2. Export ess.xlsx and wfm.xlsx
-* Save ess.xlsx file as ess.csv file. Do the same with the WFM file.
+## 2. Export ess.xlsx 
+* Save ess.xlsx file as ess.csv file. 
 * Open ess.xlsx file and change the data format (column C) to YYYY-MM-DD. Ensure that in column G floats use '.' as a separator instead of ',', and column nessie (column B) is an INT data type - remove any floats if necessary.
 
-## 3. Load data into the bronze layer
+## 3. Export WFM.xlsx file.
+* Save WFM.xlsx file as wfm.csv file.
+* Run the below script to clean up the data:
+```python
+import pandas as pd
+
+# import CSV file
+df = pd.read_csv(
+    r"C:\Users\(...)\OneDrive - (...)\Desktop\WFM (...)2025.csv",
+    delimiter=';')
+# show the data
+df.head(0).iloc[:, 5:]
+
+# drop columns
+df = df.drop(columns=[
+    'DAS ID', 'FL/Subco', 'Subco Agency', 'FirstName', 'LastName', 'Employee Last name + First name', 'Gender',
+    'StartDate', 'EndDate', 'Dummy\n/\nRoma Nr.', 'WBS',
+    'Jan 25 FTE Count ', 'Feb 25 FTE Count ', 'Mar 25 FTE Count ',
+    'Apr 25 FTE Count ', 'May 25 FTE Count ', 'Jun 25 FTE Count',
+    'Jul 25 FTE Count ', 'Aug 25 FTE Count ', 'Sep 25 FTE Count ',
+    'Oct 25 FTE Count ', 'Nov 25 FTE Count ', 'Dec 25 FTE Count ',
+    'Customer n°', 'Customer', 'Contract Type', 'Hourly\nSales Rate', '% Margin',
+    'Profile', 'Division', 'Location', 'Contractual Profile (10.A)',
+    'Seniority', ' Sales ', 'Margin', 'Total cost/month',
+    'Total sales/month', 'Organizational Unit', 'Replaceable', 'Note',
+    'Email address', 'External (BE) Contract End Date', 'PM',
+    'Clause Travel expense in SA', 'das profile', 'Overtime allowed',
+    'Standby allowed'
+])
+
+# rename columns to match SQL bronze layer structure
+df = df.rename(columns={
+    'NESSIE ID':'nessie', 
+    'Internal or external employee':'employment_type', 
+    'Country':'country',
+    'Employee First name + Last name (without "LEFT")':'name', 
+    'Contract':'contract',
+    'GCM Level':'gcm_level', 
+    'Hourly PURCHASE PRICE':'hourly_rate', 
+    'Competence':'competence', 
+    ' Cost ':'daily_rate',
+})
+
+# check numeric columns, replace NaN and cast the data type if necessary
+# ensure that column nessie is an object(!)
+df['nessie'].dtype
+# cast the data type from str to numeric, if necessary
+df['nessie'] = pd.to_numeric(df['nessie'])
+# count NaN values
+df['nessie'].value_counts(dropna=False)
+# replace NaN values with 0
+df['nessie'] = df['nessie'].fillna(0)
+# df['gcm_level'] = df['gcm_level'].fillna(0)
+
+# format numeric columns
+# copilot helped here 🫡
+df['nessie'] = df['nessie'].map(lambda x:'{:.0f}'.format(x) if x.is_integer() else str(x))
+df['gcm_level'] = df['gcm_level'].map(lambda x:'{:.0f}'.format(x) if x.is_integer() else str(x))
+
+# extract competence and drop unnecessary columns
+df['competence'] = df['competence'].str.split(',', expand=True).drop([1, 2, 3, 4, 5], axis=1)
+# contract should contain 3 letters - extract it
+df['contract'] = df['contract'].str.split(' ', expand=True).drop([1, 2], axis=1)
+
+# set employee number (nessie) as index
+df.set_index('nessie')
+
+# remove trailing spaces
+df['name'] = df['name'].str.strip()
+df['competence'] = df['competence'].str.strip()
+
+# Remove EUR symbols and cast the data type from str to float. \s removes any whitespace, `regex=True` ensures the pattern works as a regex.
+df['hourly_rate'] = df['hourly_rate'].str.replace(r'[€\s]', '', regex=True).astype(float)
+df['daily_rate'] = df['daily_rate'].str.replace(r'[€\s]', '', regex=True)
+
+# save on desktop as wfm.csv
+df.to_csv('wfm.csv', sep=',', encoding='utf-8', index=False, header=True)
+
+```
+
+## 4. Load data into the bronze layer
 Run Python script to truncate bronze layer tables and load data into bronze layer tables:
 ```Python
 # ============================================================================
@@ -92,7 +172,7 @@ finally: # this block runs no matter what happens (success or error)
         conn.close()
 
 ```
-## 4. Load data into the silver layer
+## 5. Load data into the silver layer
 Truncate and load the data into the silver layer using a procedure.
 
 ```sql
@@ -206,6 +286,7 @@ END;
 $$;
 
 ```
+
 
 
 
