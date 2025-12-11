@@ -60,8 +60,7 @@ df['nessie'].value_counts(dropna=False)
 df['nessie'] = df['nessie'].fillna(0)
 # df['gcm_level'] = df['gcm_level'].fillna(0)
 
-# format numeric columns
-# copilot helped here 🫡
+# format numeric columns (Copilot helped here 🫡)
 df['nessie'] = df['nessie'].map(lambda x:'{:.0f}'.format(x) if x.is_integer() else str(x))
 df['gcm_level'] = df['gcm_level'].map(lambda x:'{:.0f}'.format(x) if x.is_integer() else str(x))
 
@@ -286,6 +285,7 @@ END;
 $$;
 
 ```
+
 
 
 
