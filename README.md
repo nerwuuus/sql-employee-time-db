@@ -1,7 +1,7 @@
  # ess Database Project
 
 This portfolio project showcases a comprehensive database solution designed for analytics, from structured data modelling to generating actionable insights. It adheres to industry best practices in data engineering, utilising the Medallion architecture and star schema design. **Due to the presence of personal data, raw datasets are not available for external use.**
-* A Python script is used to load and clean up the WFM CSV file and truncate bronze layer tables and load data into them.
+* A Python script is used to load and clean up the WFM CSV file (Pandas library) and truncate bronze layer tables and load data into them (psycopg2 library).
 * This database ensures a well-structured approach to internal time management reporting.
 * [Work instruction](https://github.com/nerwuuus/sql-employee-time-db/blob/main/how_to_update_db_instruction.md) with all scripts needed to update ess database was created (markdown file).
 
