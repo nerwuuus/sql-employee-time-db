@@ -76,7 +76,7 @@ df.set_index('nessie')
 df['name'] = df['name'].str.strip()
 df['competence'] = df['competence'].str.strip()
 
-# Remove EUR symbols and cast the data type from str to float. \s removes any whitespace, `regex=True` ensures the pattern works as a regex.
+# Remove '€' symbols and cast the data type from str to float. '\s' removes any whitespace, 'regex=True' ensures the pattern works as a regex.
 df['hourly_rate'] = df['hourly_rate'].str.replace(r'[€\s]', '', regex=True).astype(float)
 df['daily_rate'] = df['daily_rate'].str.replace(r'[€\s]', '', regex=True)
 
@@ -285,6 +285,7 @@ END;
 $$;
 
 ```
+
 
 
 
